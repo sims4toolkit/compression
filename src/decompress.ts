@@ -19,7 +19,7 @@ export default function decompressBuffer(buffer: Buffer, compression: Compressio
     case CompressionType.DeletedRecord:
       return buffer;
     default:
-      throw new Error(`Unsupported compression type: ${compression}`);
+      throw new Error(`Decompressing "${compression} (${CompressionType[compression]})" is not supported.`);
   }
 }
 

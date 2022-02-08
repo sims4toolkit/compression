@@ -9,11 +9,13 @@ import CompressionType from "./compression-type";
  */
 export default function compressBuffer(buffer: Buffer, compression: CompressionType): Buffer {
   switch (compression) {
-    case CompressionType.Uncompressed:
-      return buffer;
     case CompressionType.ZLIB:
       return deflateSync(buffer);
+    case CompressionType.Uncompressed:
+      // fallthrough
+    case CompressionType.DeletedRecord:
+      return buffer;
     default:
-      throw new Error(`Compressing with "${CompressionType[compression]}" is not supported.`);
+      throw new Error(`Compressing with "${compression} (${CompressionType[compression]})" is not supported.`);
   }
 }
