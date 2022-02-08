@@ -1,0 +1,57 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sims4toolkit/misc/main/json-schemas/docs-item-schema.json",
+  "imports": [
+    "import { decompressBuffer } from \"@s4tk/compression\"; // ESM",
+    "const { decompressBuffer } = require(\"@s4tk/compression\"); // CJS"
+  ],
+  "header": {
+    "title": {
+      "prefix": "function",
+      "name": "decompressBuffer"
+    },
+    "description": "Function for decompressing a buffer in a particular format.",
+    "sourceCode": "src/decompress.ts"
+  },
+  "sections": [
+    {
+      "content": [
+        {
+          "displayType": "function",
+          "name": "decompressBuffer",
+          "returnType": {
+            "name": "Buffer"
+          },
+          "description": "Decompresses the given buffer using the given compression type.",
+          "arguments": [
+            {
+              "name": "buffer",
+              "description": "Buffer to decompress.",
+              "type": {
+                "name": "Buffer"
+              }
+            },
+            {
+              "name": "compression",
+              "description": "Type of compression to decode.",
+              "type": {
+                "name": "CompressionType",
+                "path": {
+                  "pkg": "compression",
+                  "group": "enums",
+                  "item": "CompressionType"
+                }
+              }
+            },
+            {
+              "name": "decompressedSize",
+              "description": "Size of the decompressed buffer.",
+              "type": {
+                "name": "number"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

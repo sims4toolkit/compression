@@ -1,22 +1,48 @@
 {
   "$schema": "https://raw.githubusercontent.com/sims4toolkit/misc/main/json-schemas/docs-item-schema.json",
   "imports": [
-    "import { TODO } from \"@s4tk/TODO\"; // ESM",
-    "const { TODO } = require(\"@s4tk/TODO\"); // CJS"
+    "import { compressBuffer } from \"@s4tk/compression\"; // ESM",
+    "const { compressBuffer } = require(\"@s4tk/compression\"); // CJS"
   ],
   "header": {
     "title": {
-      "name": "Example"
+      "prefix": "function",
+      "name": "compressBuffer"
     },
-    "description": "Lorem ipsum.",
-    "sourceCode": "/src/example.ts"
+    "description": "Function for compressing a buffer in a particular format.",
+    "sourceCode": "src/compress.ts"
   },
   "sections": [
     {
       "content": [
         {
-          "displayType": "general",
-          "paragraphs": []
+          "displayType": "function",
+          "name": "compressBuffer",
+          "returnType": {
+            "name": "Buffer"
+          },
+          "description": "Compresses the given buffer using the given compression type.",
+          "arguments": [
+            {
+              "name": "buffer",
+              "description": "Buffer to compress.",
+              "type": {
+                "name": "Buffer"
+              }
+            },
+            {
+              "name": "compression",
+              "description": "Type of compression to use.",
+              "type": {
+                "name": "CompressionType",
+                "path": {
+                  "pkg": "compression",
+                  "group": "enums",
+                  "item": "CompressionType"
+                }
+              }
+            }
+          ]
         }
       ]
     }
