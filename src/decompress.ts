@@ -6,9 +6,10 @@ import CompressionType from "./compression-type";
  * 
  * @param buffer Buffer to decompress
  * @param compression Compression algorithm to use
- * @param decompressedSize Size of buffer after decompression
+ * @param decompressedSize Size of buffer after decompression (only required for
+ * internal compression)
  */
-export default function decompressBuffer(buffer: Buffer, compression: CompressionType, decompressedSize: number): Buffer {
+export default function decompressBuffer(buffer: Buffer, compression: CompressionType, decompressedSize?: number): Buffer {
   switch (compression) {
     case CompressionType.ZLIB:
       return unzipSync(buffer);
@@ -43,6 +44,10 @@ export default function decompressBuffer(buffer: Buffer, compression: Compressio
  * @param decompressedSize Size of buffer when decompressed
  */
 function internalDecompression(data: Buffer, decompressedSize: number): Buffer {
+  if (decompressedSize == undefined) {
+    throw new Error(`Decompressed byte size must be supplied to read internal compression.`);
+  }
+
   const udata: Buffer = Buffer.alloc(decompressedSize);
 
   let udata_idx = 0;
