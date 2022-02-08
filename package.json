@@ -1,7 +1,7 @@
 {
   "name": "@s4tk/compression",
   "version": "0.1.0",
-  "description": "Functions that handle compressing and decompressing buffers.",
+  "description": "Functions and enums related to the compression of resources.",
   "main": "dst/api.js",
   "repository": {
     "type": "git",
