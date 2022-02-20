@@ -1,8 +1,8 @@
 {
   "name": "@s4tk/compression",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Functions and enums related to the compression of resources.",
-  "main": "dst/api.js",
+  "main": "./api.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/sims4toolkit/compression.git"
