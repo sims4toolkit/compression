@@ -26,14 +26,9 @@ describe("decompressBuffer", () => {
   it("should decompress internal compression if type == InternalCompression", () => {
     const compressed = readFileSync(resolve(__dirname, "./data/InternalCompression.binary"));
     expect(compressed.toString().startsWith("STBL")).to.be.false;
-    const decompressed = decompressBuffer(compressed, CompressionType.InternalCompression, 8169);
+    const decompressed = decompressBuffer(compressed, CompressionType.InternalCompression);
+    expect(decompressed.length).to.equal(8169);
     expect(decompressed.toString().startsWith("STBL")).to.be.true;
-  });
-
-  it("should throw for internal compression if byte length not given", () => {
-    const compressed = readFileSync(resolve(__dirname, "./data/InternalCompression.binary"));
-    expect(compressed.toString().startsWith("STBL")).to.be.false;
-    expect(() => decompressBuffer(compressed, CompressionType.InternalCompression)).to.throw();
   });
 
   it("should throw if type == StreamableCompresssion", () => {

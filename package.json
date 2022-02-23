@@ -1,6 +1,6 @@
 {
   "name": "@s4tk/compression",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Functions and enums related to the compression of resources.",
   "main": "./api.js",
   "repository": {

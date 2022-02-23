@@ -41,13 +41,6 @@
                   "item": "CompressionType"
                 }
               }
-            },
-            {
-              "name": "decompressedSize",
-              "description": "Size of the decompressed buffer.",
-              "type": {
-                "name": "number"
-              }
             }
           ]
         }

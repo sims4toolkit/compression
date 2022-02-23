@@ -6,15 +6,13 @@ import CompressionType from "./compression-type";
  * 
  * @param buffer Buffer to decompress
  * @param compression Compression algorithm to use
- * @param decompressedSize Size of buffer after decompression (only required for
- * internal compression)
  */
-export default function decompressBuffer(buffer: Buffer, compression: CompressionType, decompressedSize?: number): Buffer {
+export default function decompressBuffer(buffer: Buffer, compression: CompressionType): Buffer {
   switch (compression) {
     case CompressionType.ZLIB:
       return unzipSync(buffer);
     case CompressionType.InternalCompression:
-      return internalDecompression(buffer, decompressedSize)
+      return internalDecompression(buffer)
     case CompressionType.Uncompressed:
       // fallthrough
     case CompressionType.DeletedRecord:
@@ -41,17 +39,13 @@ export default function decompressBuffer(buffer: Buffer, compression: Compressio
  * than that, this is basically Scumbumbo's code. Major credit to him.
  * 
  * @param data Buffer to decompress
- * @param decompressedSize Size of buffer when decompressed
  */
-function internalDecompression(data: Buffer, decompressedSize: number): Buffer {
-  if (decompressedSize == undefined) {
-    throw new Error(`Decompressed byte size must be supplied to read internal compression.`);
-  }
-
+function internalDecompression(data: Buffer): Buffer {
+  const decompressedSize = readUInt24BE(data, 2);
   const udata: Buffer = Buffer.alloc(decompressedSize);
 
   let udata_idx = 0;
-  let data_idx = 5; // Skip 2 bytes of flags + 3 indicating decompressedSize
+  let data_idx = 5; // 2 bytes flags + 3 bytes size
   let compressionFormat = data[0];
   let controlCode: number; // byte
   let size: number;
@@ -127,4 +121,17 @@ function copyBufferRange(srcBuffer: Buffer, srcIndex: number, dstBuffer: Buffer,
   for (let i = 0; i < range; i++) {
     dstBuffer[dstIndex + i] = srcBuffer[srcIndex + i];
   }
+}
+
+/**
+ * Reads a 24-bit integer with big endianness from a buffer.
+ * 
+ * @param data Buffer with at least 3 bytes
+ * @param offset Offset at which to read UInt24
+ */
+function readUInt24BE(data: Buffer, offset: number): number {
+  let result = data.readUInt8(offset) * (2 ** 16);
+  result += data.readUInt8(offset + 1) * (2 ** 8);
+  result += data.readUInt8(offset + 2);
+  return result;
 }
