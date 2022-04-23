@@ -1,0 +1,53 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sims4toolkit/misc/main/json-schemas/docs-item-schema.json",
+  "imports": [
+    "import type { CompressedBuffer } from \"@s4tk/compression\"; // TS only"
+  ],
+  "header": {
+    "title": {
+      "prefix": "interface",
+      "name": "CompressedBuffer"
+    },
+    "description": "Wrapper for a buffer that is compressed in one of the supported formats.",
+    "sourceCode": "src/compressed-buffer.ts"
+  },
+  "sections": [
+    {
+      "title": "Properties",
+      "content": [
+        {
+          "displayType": "property",
+          "prefix": "readonly",
+          "name": "buffer",
+          "description": "The buffer.",
+          "type": {
+            "name": "Buffer"
+          }
+        },
+        {
+          "displayType": "property",
+          "prefix": "readonly",
+          "name": "compressionType",
+          "description": "How the buffer is compressed.",
+          "type": {
+            "name": "CompressionType",
+            "path": {
+              "pkg": "compression",
+              "group": "enums",
+              "item": "CompressionType"
+            }
+          }
+        },
+        {
+          "displayType": "property",
+          "prefix": "readonly",
+          "name": "sizeDecompressed",
+          "description": "The byte size of the buffer when decompressed.",
+          "type": {
+            "name": "number"
+          }
+        }
+      ]
+    }
+  ]
+}
